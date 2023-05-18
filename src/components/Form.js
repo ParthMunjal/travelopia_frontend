@@ -9,7 +9,7 @@ function Form() {
     const [email, setEmail] = useState('');
     const [destination, setDestination] = useState('India');
     const [travelers, setTravelers] = useState(0);
-    const [budgetPerPerson, setBudgetPerPerson] = useState(0);
+    const [budget, setBudget] = useState(0);
 
     // invalid form inputs state variable
     const [showError, setShowError] = useState(false);
@@ -20,7 +20,7 @@ function Form() {
         setEmail('');
         setDestination('India');
         setTravelers(0);
-        setBudgetPerPerson(0);
+        setBudget(0);
     }
 
     const handleSubmit= (event) => {
@@ -31,17 +31,32 @@ function Form() {
             email,
             destination,
             travelers,
-            budgetPerPerson
+            budget
         }
 
         if(validateFormValues(formValues) === false) {
             setShowError(true);
             setShowSuccess(false);
         } else {
-            setShowError(false);
-            setShowSuccess(true);
+            fetch('http://localhost:5000/submissions/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formValues)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Submission Successful:', data);
+                setShowError(false);
+                setShowSuccess(true);
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+            })
+            
         }
-        resetStateVariables()
+        resetStateVariables();  
     }
 
     useEffect(() => {
@@ -100,8 +115,8 @@ function Form() {
             <input 
                 id = "budget" 
                 type = "number" 
-                value = {budgetPerPerson} 
-                onChange={(event) => setBudgetPerPerson(event.target.value)}
+                value = {budget} 
+                onChange={(event) => setBudget(event.target.value)}
                 required/><br/>
 
             <button 
