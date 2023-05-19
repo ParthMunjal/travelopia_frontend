@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function SubmissionsPage() {
     const [submissions, setSubmissions] = useState([]);
@@ -8,7 +9,6 @@ function SubmissionsPage() {
         .then(response => response.json())
         .then(data => {
             setSubmissions(data);
-            console.log(data);
         })
         .catch(err => {
             console.error('Error fetching submissions: ', err);
@@ -33,6 +33,11 @@ function SubmissionsPage() {
                 ))}
             </ul>
         </div>
+        <Link to = "/">
+            <button
+                className='Submit'
+                type = 'submit'>Back</button>
+        </Link>
         </>
     )
 }

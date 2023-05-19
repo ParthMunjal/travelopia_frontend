@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
 import '../styles.css';
 import validateFormValues from '../helpers/formValidations';
-
 
 function Form() {
     // form state variables
@@ -123,6 +123,12 @@ function Form() {
                 className = "Submit"
                 type = "submit"
                 onClick={handleSubmit}>Submit</button>
+
+            <Link to = "/submissions">
+                <button
+                className='Submit'
+                type = 'submit'>View all Submissions</button>
+            </Link>
         </form>
         </>
     )
