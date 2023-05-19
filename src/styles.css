@@ -15,8 +15,20 @@ select {
 }
 
 button {
+    margin-left: 10px;
     border: none;
     padding: 10px;
+}
+
+ul {
+    padding-inline-start: 0px;
+    list-style-type: none;
+}
+
+li {
+    border: 1px solid black;
+    padding: 5px;
+    margin-top: 5px;
 }
 
 .Submit {
